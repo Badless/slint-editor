@@ -9,7 +9,6 @@ build = "build.rs"
 
 [dependencies]
 slint = "1.0"
-syntect = "5.0.0"
 
 [build-dependencies]
 slint-build = "1.0"
