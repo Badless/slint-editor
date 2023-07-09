@@ -1,16 +1,66 @@
-import { Button, VerticalBox } from "std-widgets.slint";
+import { Button, VerticalBox, TextEdit , LineEdit} from "std-widgets.slint";
 
 export component AppWindow inherits Window {
-    in-out property<int> counter: 42;
-    callback request-increase-value();
-    VerticalBox {
-        Text {
-            text: "Counter: \{root.counter}";
+    in-out property<string> editor-text: "print(\"Hello World!\")";
+    in-out property<string> file-name: "";
+    height: 300px;
+    width: 500px;
+    title: "Python Editor!";
+    callback request-execute();
+    callback request-save();
+    callback show-popup();
+    popup := PopupWindow {
+        Rectangle {
+            width: 200px;
+            height: 100px;
+            x: root.width/2 - self.width/2;
+            y: root.height/2 - self.height/2;
+            background: #434343;
+            border-radius: 5px;
+            VerticalBox {
+                alignment: center;
+                HorizontalLayout {
+                    alignment: center;
+                    Text {
+                        font-size: 14px;
+                        text: "File Name cannot be empty!";
+                    }
+                }
+            }
         }
-        Button {
-            text: "Increase value";
-            clicked => {
-                root.request-increase-value();
+    }
+    show-popup => {
+        popup.show();
+    }
+    VerticalBox {
+        HorizontalLayout {
+            spacing: 10px;
+            Button {
+                text: "Save!";
+                clicked => {
+                    root.request-save();
+                }
+            }
+            LineEdit {
+                max-width: 0px;
+                placeholder-text: "file name!";
+                text: root.file-name;
+                edited => {
+                    root.file-name = self.text;
+                }
+            }
+            Button {
+                text: "Execute!";
+                clicked => {
+                    root.request-execute();
+                }
+            }
+        }
+        TextEdit {
+            text: root.editor-text;
+            font-size: 16px;
+            edited => {
+                root.editor-text = self.text
             }
         }
     }
