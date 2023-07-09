@@ -11,5 +11,5 @@ Code Editor made in SlintUI!
 
 ## Screenshots
 
-![Screenshot](https://imgur.com/diIL4xr)
+![Screenshot](https://github.com/Badless/slint-editor/blob/main/Screenshot%202023-07-09%20at%2023.19.52.png)
 
