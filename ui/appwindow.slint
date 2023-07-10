@@ -1,14 +1,20 @@
-import { Button, VerticalBox, TextEdit , LineEdit} from "std-widgets.slint";
+import { Button, VerticalBox, TextEdit , LineEdit, StandardButton, ComboBox, GroupBox, GridBox, TabWidget} from "std-widgets.slint";
 
 export component AppWindow inherits Window {
-    in-out property<string> editor-text: "print(\"Hello World!\")";
+    in-out property<string> editor-text-tab1: "";
+    in-out property<string> editor-text-tab2: "";
+    in-out property<string> editor-text-tab3: "";
     in-out property<string> file-name: "";
+    in-out property<string> tab1-name: "Tab 1";
+    in-out property<string> tab2-name: "Tab 2";
+    in-out property<string> tab3-name: "Tab 3";
     height: 300px;
     width: 500px;
     title: "Python Editor!";
     callback request-execute();
     callback request-save();
     callback show-popup();
+    callback request-open();
     popup := PopupWindow {
         Rectangle {
             width: 200px;
@@ -36,6 +42,12 @@ export component AppWindow inherits Window {
         HorizontalLayout {
             spacing: 10px;
             Button {
+                text: "Open";
+                clicked => {
+                    root.request-open();
+                }
+            }
+            Button {
                 text: "Save!";
                 clicked => {
                     root.request-save();
@@ -56,11 +68,48 @@ export component AppWindow inherits Window {
                 }
             }
         }
-        TextEdit {
-            text: root.editor-text;
-            font-size: 16px;
-            edited => {
-                root.editor-text = self.text
+        TabWidget {
+            Tab {
+                title: root.tab1-name;
+                GridBox {
+                    width: root.width;
+                    TextEdit {
+                        text: root.editor-text-tab1;
+                        font-size: 16px;
+                        height: root.height - 95px;
+                        edited => {
+                            root.editor-text-tab1 = self.text
+                        }
+                    }
+                }
+            }
+            Tab {
+                title: root.tab2-name;
+                GridBox {
+                    width: root.width;
+                    TextEdit {
+                        text: root.editor-text-tab2;
+                        font-size: 16px;
+                        height: root.height - 95px;
+                        edited => {
+                            root.editor-text-tab2 = self.text
+                        }
+                    }
+                }
+            }
+            Tab {
+                title: root.tab3-name;
+                GridBox {
+                    width: root.width;
+                    TextEdit {
+                        text: root.editor-text-tab3;
+                        font-size: 16px;
+                        height: root.height - 95px;
+                        edited => {
+                            root.editor-text-tab3 = self.text
+                        }
+                    }
+                }
             }
         }
     }
