@@ -9,6 +9,6 @@ Code Editor made in SlintUI!
 - [@Badless](https://www.github.com/Badless)
 
 
-## Screenshots
+## Showcase
 
-![Screenshot](https://github.com/Badless/slint-editor/blob/main/Screenshot%202023-07-10%20at%2021.07.43.png)
+[![Showcase Video](https://img.youtube.com/vi/WFzGNkmhfXs/default.jpg)](https://youtu.be/WFzGNkmhfXs)
