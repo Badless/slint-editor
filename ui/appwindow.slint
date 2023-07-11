@@ -1,13 +1,13 @@
-import { Button, VerticalBox, TextEdit , LineEdit, StandardButton, ComboBox, GroupBox, GridBox, TabWidget} from "std-widgets.slint";
+import { Button, VerticalBox, TextEdit, GridBox, TabWidget} from "std-widgets.slint";
 
 export component AppWindow inherits Window {
     in-out property<string> editor-text-tab1: "";
     in-out property<string> editor-text-tab2: "";
     in-out property<string> editor-text-tab3: "";
-    in-out property<string> file-name: "";
     in-out property<string> tab1-name: "Tab 1";
     in-out property<string> tab2-name: "Tab 2";
     in-out property<string> tab3-name: "Tab 3";
+    in-out property<int> tab-index: test.current-index;
     height: 300px;
     width: 500px;
     title: "Python Editor!";
@@ -53,14 +53,6 @@ export component AppWindow inherits Window {
                     root.request-save();
                 }
             }
-            LineEdit {
-                max-width: 0px;
-                placeholder-text: "file name!";
-                text: root.file-name;
-                edited => {
-                    root.file-name = self.text;
-                }
-            }
             Button {
                 text: "Execute!";
                 clicked => {
@@ -68,7 +60,7 @@ export component AppWindow inherits Window {
                 }
             }
         }
-        TabWidget {
+        test := TabWidget {
             Tab {
                 title: root.tab1-name;
                 GridBox {
